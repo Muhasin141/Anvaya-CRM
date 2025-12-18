@@ -1,0 +1,145 @@
+import React, { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import SideBar from "../components/SideBar";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+const SettingsPage = () => {
+  const { leads, agents, deleteLead, deleteAgent, loading } =
+    useContext(AppContext);
+  const navigate = useNavigate();
+
+  const handleDeleteLead = (id) => {
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
+
+    try {
+      deleteLead(id);
+      toast.success("Lead deleted successfully");
+      navigate("/settings");
+    } catch (err) {
+      toast.error("Failed to delete lead: " + err.message);
+    }
+  };
+
+  const handleDeleteAgent = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this agent?")) return;
+
+    try {
+      await deleteAgent(id);
+      toast.success("Agent deleted successfully");
+      navigate("/settings");
+    } catch (err) {
+      toast.error(err.message || "Failed to delete agent");
+    }
+  };
+
+  return (
+    <div
+      className="layout"
+      style={{ display: "flex", minHeight: "100vh", flexDirection: "row" }}
+    >
+      <SideBar />
+      <main style={{ flex: 1, padding: "1rem", minWidth: 0 }}>
+        <h1>Settings</h1>
+
+        <section style={{ marginBottom: "2rem" }}>
+          <h2>Leads</h2>
+          {loading ? (
+            <p>Loading leads...</p>
+          ) : leads.length === 0 ? (
+            <p>No leads found.</p>
+          ) : (
+            <ul style={{ padding: 0 }}>
+              {leads.map((lead) => (
+                <li
+                  key={lead._id}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "0.5rem 0",
+                    borderBottom: "1px solid #ddd",
+                    flexWrap: "wrap",
+                    wordBreak: "break-word",
+                    overflowWrap: "anywhere",
+                  }}
+                >
+                  <span>
+                    {lead.name} - {lead.status}
+                  </span>
+                  <button
+                    style={{
+                      background: "red",
+                      color: "white",
+                      border: "none",
+                      padding: "0.3rem 0.6rem",
+                      cursor: "pointer",
+                      marginTop: "0.3rem",
+                    }}
+                    onClick={() => handleDeleteLead(lead._id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section>
+          <h2>Sales Agents</h2>
+          {agents.length === 0 ? (
+            <p>No agents found.</p>
+          ) : (
+            <ul style={{ padding: 0 }}>
+              {agents.map((agent) => (
+                <li
+                  key={agent._id}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "0.5rem 0",
+                    borderBottom: "1px solid #ddd",
+                    flexWrap: "wrap",
+                    wordBreak: "break-word",
+                    overflowWrap: "anywhere",
+                  }}
+                >
+                  <span>
+                    {agent.name} - {agent.email}
+                  </span>
+                  <button
+                    style={{
+                      background: "red",
+                      color: "white",
+                      border: "none",
+                      padding: "0.3rem 0.6rem",
+                      cursor: "pointer",
+                      marginTop: "0.3rem",
+                    }}
+                    onClick={() => handleDeleteAgent(agent._id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </main>
+
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .layout {
+              flex-direction: column;
+            }
+          }
+        `}
+      </style>
+    </div>
+  );
+};
+
+export default SettingsPage;
