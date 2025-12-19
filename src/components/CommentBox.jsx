@@ -13,31 +13,31 @@ const CommentBox = ({ leadId, comments, addComment }) => {
     e.preventDefault();
 
     if (!commentText.trim() || !author) {
-      toast.warning("Please select an agent and enter a comment."); // Warning toast for empty input
+      toast.warning("Please select an agent and enter a comment.");
       return;
     }
 
     try {
       await addComment(leadId, commentText, author);
-      toast.success("Comment added successfully!"); // Success toast
+      toast.success("Comment added successfully!");
       setCommentText("");
       setAuthor("");
     } catch (err) {
       console.error("Failed to add comment:", err);
-      toast.error("Failed to add comment."); // Error toast
+      toast.error("Failed to add comment.");
     }
   };
 
   return (
     <div>
       {/* Add Comment Form */}
-      <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
-        {/* Agent Dropdown */}
+      <form onSubmit={handleSubmit} className="mb-3 d-flex flex-wrap gap-2">
         <select
+          className="form-select"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
-          style={{ marginRight: "10px" }}
+          style={{ minWidth: "200px" }}
         >
           <option value="">Select Agent</option>
           {agents.map((agent) => (
@@ -47,35 +47,33 @@ const CommentBox = ({ leadId, comments, addComment }) => {
           ))}
         </select>
 
-        {/* Comment Input */}
         <input
           type="text"
+          className="form-control"
           placeholder="Add a comment"
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           required
-          style={{ marginRight: "10px", width: "300px" }}
+          style={{ flex: "1" }}
         />
 
-        <button type="submit">Add Comment</button>
+        <button type="submit" className="btn btn-primary">
+          Add Comment
+        </button>
       </form>
 
       {/* Comments List */}
-      <div>
+      <div className="list-group">
         {comments.length === 0 ? (
-          <p>No comments yet.</p>
+          <p className="text-muted">No comments yet.</p>
         ) : (
           comments.map((comment) => (
             <div
               key={comment._id}
-              style={{
-                border: "1px solid #ddd",
-                padding: "0.5rem",
-                marginBottom: "0.5rem",
-              }}
+              className="list-group-item list-group-item-light mb-2"
             >
               <strong>{comment.author?.name || "Unknown Agent"}</strong>
-              <p>{comment.commentText}</p>
+              <p className="mb-0">{comment.commentText}</p>
             </div>
           ))
         )}
@@ -88,3 +86,4 @@ const CommentBox = ({ leadId, comments, addComment }) => {
 };
 
 export default CommentBox;
+
