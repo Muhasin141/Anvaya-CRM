@@ -6,28 +6,21 @@ import LeadCard from "../components/LeadCard";
 const LeadsByStatusPage = () => {
   const { leads, agents, loading } = useContext(AppContext);
 
-  const [statusFilter, setStatusFilter] = useState(""); // New, Contacted, Qualified, etc.
+  const [statusFilter, setStatusFilter] = useState("");
   const [agentFilter, setAgentFilter] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("");
-  const [sortByTime, setSortByTime] = useState(""); // "asc" or "desc"
+  const [sortByTime, setSortByTime] = useState("");
   const [filteredLeads, setFilteredLeads] = useState([]);
 
   useEffect(() => {
     let tempLeads = [...leads];
 
-    if (statusFilter) {
-      tempLeads = tempLeads.filter((lead) => lead.status === statusFilter);
-    }
-
-    if (agentFilter) {
-      tempLeads = tempLeads.filter(
-        (lead) => lead.salesAgent?._id === agentFilter
-      );
-    }
-
-    if (priorityFilter) {
-      tempLeads = tempLeads.filter((lead) => lead.priority === priorityFilter);
-    }
+    if (statusFilter)
+      tempLeads = tempLeads.filter((l) => l.status === statusFilter);
+    if (agentFilter)
+      tempLeads = tempLeads.filter((l) => l.salesAgent?._id === agentFilter);
+    if (priorityFilter)
+      tempLeads = tempLeads.filter((l) => l.priority === priorityFilter);
 
     if (sortByTime) {
       tempLeads.sort((a, b) =>
@@ -41,74 +34,81 @@ const LeadsByStatusPage = () => {
   }, [leads, statusFilter, agentFilter, priorityFilter, sortByTime]);
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="d-flex min-vh-100">
       <SideBar />
-      <main style={{ flex: 1, padding: "1rem" }}>
-        <h1>Leads By Status</h1>
+
+      <main className="flex-fill p-3 p-md-4" style={{ minWidth: 0 }}>
+        <h1 className="mb-4">Leads By Status</h1>
 
         {/* Filters */}
-        <div style={{ marginBottom: "1rem" }}>
-          <label>
-            Status:
+        <div className="row g-2 mb-4">
+          <div className="col-12 col-md-3">
             <select
+              className="form-select"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
-              <option value="">All</option>
+              <option value="">All Status</option>
               <option value="New">New</option>
               <option value="Contacted">Contacted</option>
               <option value="Qualified">Qualified</option>
             </select>
-          </label>
+          </div>
 
-          <label style={{ marginLeft: "1rem" }}>
-            Sales Agent:
+          <div className="col-12 col-md-3">
             <select
+              className="form-select"
               value={agentFilter}
               onChange={(e) => setAgentFilter(e.target.value)}
             >
-              <option value="">All</option>
+              <option value="">All Agents</option>
               {agents.map((agent) => (
                 <option key={agent._id} value={agent._id}>
                   {agent.name}
                 </option>
               ))}
             </select>
-          </label>
+          </div>
 
-          <label style={{ marginLeft: "1rem" }}>
-            Priority:
+          <div className="col-12 col-md-3">
             <select
+              className="form-select"
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
             >
-              <option value="">All</option>
+              <option value="">All Priorities</option>
               <option value="High">High</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
-          </label>
+          </div>
 
-          <label style={{ marginLeft: "1rem" }}>
-            Sort by Time to Close:
+          <div className="col-12 col-md-3">
             <select
+              className="form-select"
               value={sortByTime}
               onChange={(e) => setSortByTime(e.target.value)}
             >
-              <option value="">None</option>
+              <option value="">Sort by Time to Close</option>
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
-          </label>
+          </div>
         </div>
 
         {/* Leads list */}
         {loading ? (
-          <p>Loading leads...</p>
+          <div className="alert alert-info">Loading leads...</div>
         ) : filteredLeads.length === 0 ? (
-          <p>No leads found.</p>
+          <div className="alert alert-warning">No leads found.</div>
         ) : (
-          filteredLeads.map((lead) => <LeadCard key={lead._id} lead={lead} />)
+          <div className="row g-3">
+            {filteredLeads.map((lead) => (
+              <div key={lead._id} className="col-12 col-md-6 col-lg-4">
+                <LeadCard lead={lead} />
+              </div>
+            ))}
+          </div>
         )}
       </main>
     </div>
