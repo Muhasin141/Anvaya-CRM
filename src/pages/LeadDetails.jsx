@@ -5,6 +5,7 @@ import SideBar from "../components/SideBar";
 import CommentBox from "../components/CommentBox";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const LeadDetails = () => {
   const { id } = useParams();
@@ -25,16 +26,12 @@ const LeadDetails = () => {
 
   const handleDelete = () => {
     if (!lead) return;
-
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this lead?"
-    );
-    if (!confirmDelete) return;
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
 
     try {
       deleteLead(lead._id);
       toast.success("Lead deleted successfully");
-      navigate("/leads"); // redirect after delete
+      navigate("/leads");
     } catch (err) {
       toast.error("Failed to delete lead: " + err.message);
     }
@@ -46,9 +43,9 @@ const LeadDetails = () => {
 
   if (!lead) {
     return (
-      <div style={{ display: "flex", minHeight: "100vh" }}>
+      <div className="d-flex min-vh-100">
         <SideBar />
-        <main style={{ flex: 1, padding: "1rem" }}>
+        <main className="flex-fill p-3 p-md-4">
           <p>Loading lead...</p>
         </main>
       </div>
@@ -56,55 +53,59 @@ const LeadDetails = () => {
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="d-flex min-vh-100">
+      {/* Sidebar */}
       <SideBar />
 
-      <main style={{ flex: 1, padding: "1rem" }}>
-        <h1>{lead.name}</h1>
+      {/* Main Content */}
+      <main className="flex-fill p-3 p-md-4" style={{ minWidth: 0 }}>
+        <h1 className="mb-4">Lead Details</h1>
 
-        <p>
-          <strong>Status:</strong> {lead.status}
-        </p>
-        <p>
-          <strong>Source:</strong> {lead.source}
-        </p>
-        <p>
-          <strong>Priority:</strong> {lead.priority}
-        </p>
-        <p>
-          <strong>Time to Close:</strong> {lead.timeToClose} days
-        </p>
+        {/* Lead Card */}
+        <div className="card mb-4 shadow-sm">
+          <div className="card-body">
+            <h2 className="card-title">{lead.name}</h2>
+            <p>
+              <strong>Status:</strong> {lead.status}
+            </p>
+            <p>
+              <strong>Source:</strong> {lead.source}
+            </p>
+            <p>
+              <strong>Priority:</strong> {lead.priority}
+            </p>
+            <p>
+              <strong>Time to Close:</strong> {lead.timeToClose} days
+            </p>
+            <p>
+              <strong>Assigned Agent:</strong>{" "}
+              {lead.salesAgent?.name || "Unassigned"}
+            </p>
 
-        <p>
-          <strong>Assigned Agent:</strong>{" "}
-          {lead.salesAgent?.name || "Unassigned"}
-        </p>
-
-        {/* ACTION BUTTONS */}
-        <div style={{ marginBottom: "1rem" }}>
-          <button
-            onClick={handleEdit}
-            style={{ marginRight: "10px", cursor: "pointer" }}
-          >
-            Edit Lead
-          </button>
-
-          <button
-            onClick={handleDelete}
-            style={{ cursor: "pointer", background: "red", color: "white" }}
-          >
-            Delete Lead
-          </button>
+            {/* Action Buttons */}
+            <div className="mt-3 d-flex flex-wrap gap-2">
+              <button className="btn btn-primary" onClick={handleEdit}>
+                Edit Lead
+              </button>
+              <button className="btn btn-danger" onClick={handleDelete}>
+                Delete Lead
+              </button>
+            </div>
+          </div>
         </div>
 
-        <h2>Comments</h2>
-        <CommentBox
-          leadId={lead._id}
-          comments={comments}
-          addComment={addComment}
-        />
+        {/* Comments Card */}
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <h3 className="card-title">Comments</h3>
+            <CommentBox
+              leadId={lead._id}
+              comments={comments}
+              addComment={addComment}
+            />
+          </div>
+        </div>
 
-        {/* Toast container */}
         <ToastContainer
           position="top-right"
           autoClose={3000}
