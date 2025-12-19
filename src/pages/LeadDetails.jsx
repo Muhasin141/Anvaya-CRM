@@ -26,7 +26,7 @@ const LeadDetails = () => {
 
   const handleDelete = () => {
     if (!lead) return;
-    if (!window.confirm("Are you sure you want to delete this lead?")) return;
+   
 
     try {
       deleteLead(lead._id);
@@ -121,3 +121,4 @@ const LeadDetails = () => {
 };
 
 export default LeadDetails;
+
