@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import SideBar from "../components/SideBar";
 import { toast } from "react-toastify";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const EditAgent = () => {
   const { id } = useParams();
@@ -43,46 +44,64 @@ const EditAgent = () => {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="d-flex min-vh-100">
+      {/* Sidebar */}
       <SideBar />
-      <main style={{ flex: 1, padding: "1rem" }}>
-        <h1>Edit Agent</h1>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* Main content */}
+      <main className="flex-fill p-3 p-md-4" style={{ minWidth: 0 }}>
+        <h1 className="mb-4">Edit Agent</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Name:</label>
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+        <div className="card shadow-sm">
+          <div className="card-body">
+            {error && <div className="alert alert-danger">{error}</div>}
+
+            <form onSubmit={handleSubmit}>
+              {/* Name */}
+              <div className="mb-3">
+                <label className="form-label">Name</label>
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="form-control"
+                  required
+                />
+              </div>
+
+              {/* Email */}
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="form-control"
+                  required
+                />
+              </div>
+
+              {/* Buttons */}
+              <div className="d-flex flex-wrap gap-2">
+                <button type="submit" className="btn btn-primary">
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
-
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <button type="submit" style={{ marginRight: "10px" }}>
-            Save Changes
-          </button>
-
-          <button type="button" onClick={() => navigate(-1)}>
-            Cancel
-          </button>
-        </form>
+        </div>
       </main>
     </div>
   );
 };
 
 export default EditAgent;
+
