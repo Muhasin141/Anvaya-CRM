@@ -10,8 +10,7 @@ const SettingsPage = () => {
   const navigate = useNavigate();
 
   const handleDeleteLead = (id) => {
-    if (!window.confirm("Are you sure you want to delete this lead?")) return;
-
+  
     try {
       deleteLead(id);
       toast.success("Lead deleted successfully");
@@ -22,7 +21,7 @@ const SettingsPage = () => {
   };
 
   const handleDeleteAgent = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this agent?")) return;
+  
 
     try {
       await deleteAgent(id);
@@ -150,5 +149,6 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+
 
 
