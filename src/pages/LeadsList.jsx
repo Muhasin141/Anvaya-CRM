@@ -7,14 +7,10 @@ import { Link } from "react-router-dom";
 const LeadsList = () => {
   const { leads, loading, agents } = useContext(AppContext);
 
-  // Filter states
   const [statusFilter, setStatusFilter] = useState("");
   const [agentFilter, setAgentFilter] = useState("");
-
-  // Sort state
   const [sortOption, setSortOption] = useState("");
 
-  // Filter leads
   let filteredLeads = leads.filter((lead) => {
     const statusMatch = statusFilter ? lead.status === statusFilter : true;
     const agentMatch = agentFilter
@@ -23,7 +19,6 @@ const LeadsList = () => {
     return statusMatch && agentMatch;
   });
 
-  // Sort leads
   if (sortOption === "priority") {
     filteredLeads.sort((a, b) => {
       const priorityOrder = { High: 1, Medium: 2, Low: 3 };
@@ -34,64 +29,74 @@ const LeadsList = () => {
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="d-flex min-vh-100">
       <SideBar />
-      <main style={{ flex: 1, padding: "1rem" }}>
-        <h1>Leads List</h1>
-        <Link to="/add-lead">Add New Lead</Link>
+
+      <main className="flex-fill p-3 p-md-4">
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h1>Leads List</h1>
+          <Link className="btn btn-primary" to="/add-lead">
+            + Add New Lead
+          </Link>
+        </div>
 
         {/* Filters */}
-        <div style={{ margin: "1rem 0" }}>
-          <label>
-            Status:{" "}
+        <div className="row g-2 mb-4">
+          <div className="col-12 col-md-4">
             <select
+              className="form-select"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
-              <option value="">All</option>
+              <option value="">All Status</option>
               <option value="New">New</option>
               <option value="Contacted">Contacted</option>
               <option value="Qualified">Qualified</option>
               <option value="Proposal Sent">Proposal Sent</option>
+              <option value="Closed">Closed</option>
             </select>
-          </label>
+          </div>
 
-          <label style={{ marginLeft: "1rem" }}>
-            Sales Agent:{" "}
+          <div className="col-12 col-md-4">
             <select
+              className="form-select"
               value={agentFilter}
               onChange={(e) => setAgentFilter(e.target.value)}
             >
-              <option value="">All</option>
+              <option value="">All Agents</option>
               {agents.map((agent) => (
                 <option key={agent._id} value={agent._id}>
                   {agent.name}
                 </option>
               ))}
             </select>
-          </label>
+          </div>
 
-          <label style={{ marginLeft: "1rem" }}>
-            Sort by:{" "}
+          <div className="col-12 col-md-4">
             <select
+              className="form-select"
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
             >
-              <option value="">None</option>
+              <option value="">Sort by</option>
               <option value="priority">Priority</option>
               <option value="timeToClose">Time to Close</option>
             </select>
-          </label>
+          </div>
         </div>
 
-        {loading && <p>Loading leads...</p>}
+        {loading && <div className="alert alert-info">Loading leads...</div>}
 
         {/* Leads List */}
-        <div>
+        <div className="row g-3">
           {filteredLeads.length === 0 ? (
-            <p>No leads found</p>
+            <div className="alert alert-warning">No leads found</div>
           ) : (
-            filteredLeads.map((lead) => <LeadCard key={lead._id} lead={lead} />)
+            filteredLeads.map((lead) => (
+              <div key={lead._id} className="col-12 col-md-6 col-lg-4">
+                <LeadCard lead={lead} />
+              </div>
+            ))
           )}
         </div>
       </main>
@@ -100,3 +105,4 @@ const LeadsList = () => {
 };
 
 export default LeadsList;
+
