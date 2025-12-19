@@ -26,13 +26,9 @@ ChartJS.register(
 const Reports = () => {
   const { leads, agents } = useContext(AppContext);
 
-  // ------------------------------
-  // 1. Pipeline vs Closed
-  // ------------------------------
   const pipelineVsClosed = useMemo(() => {
     const closed = leads.filter((l) => l.status === "Closed").length;
     const pipeline = leads.length - closed;
-
     return {
       labels: ["Pipeline", "Closed"],
       datasets: [
@@ -44,22 +40,14 @@ const Reports = () => {
     };
   }, [leads]);
 
-  // ------------------------------
-  // 2. Leads Closed by Agent
-  // ------------------------------
   const leadsByAgent = useMemo(() => {
     const counts = {};
-
-    agents.forEach((agent) => {
-      counts[agent.name] = 0;
-    });
-
+    agents.forEach((agent) => (counts[agent.name] = 0));
     leads.forEach((lead) => {
       if (lead.status === "Closed" && lead.salesAgent) {
         counts[lead.salesAgent.name]++;
       }
     });
-
     return {
       labels: Object.keys(counts),
       datasets: [
@@ -72,16 +60,11 @@ const Reports = () => {
     };
   }, [leads, agents]);
 
-  // ------------------------------
-  // 3. Lead Status Distribution
-  // ------------------------------
   const statusDistribution = useMemo(() => {
     const statuses = {};
-
     leads.forEach((lead) => {
       statuses[lead.status] = (statuses[lead.status] || 0) + 1;
     });
-
     return {
       labels: Object.keys(statuses),
       datasets: [
@@ -99,10 +82,9 @@ const Reports = () => {
     };
   }, [leads]);
 
-  // Chart options for responsiveness
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: false, // allows height to be flexible
+    maintainAspectRatio: false,
   };
 
   return (
@@ -116,38 +98,38 @@ const Reports = () => {
     >
       <SideBar />
 
-      <main
-        style={{
-          flex: 1,
-          padding: "1.5rem",
-          minWidth: 0,
-        }}
-      >
-        <h1>Anvaya CRM Reports</h1>
+      <main style={{ flex: 1, padding: "1.5rem", minWidth: 0 }}>
+        <h1 className="mb-4">Anvaya CRM Reports</h1>
 
         {/* Pipeline vs Closed */}
-        <section style={{ marginBottom: "2rem" }}>
-          <h3>Total Leads: Pipeline vs Closed</h3>
-          <div style={{ width: "100%", maxWidth: "500px", height: "300px" }}>
-            <Pie data={pipelineVsClosed} options={chartOptions} />
+        <div className="card mb-4 shadow-sm">
+          <div className="card-body">
+            <h5 className="card-title">Total Leads: Pipeline vs Closed</h5>
+            <div style={{ width: "100%", maxWidth: "500px", height: "300px" }}>
+              <Pie data={pipelineVsClosed} options={chartOptions} />
+            </div>
           </div>
-        </section>
+        </div>
 
         {/* Leads Closed by Agent */}
-        <section style={{ marginBottom: "2rem" }}>
-          <h3>Leads Closed by Sales Agent</h3>
-          <div style={{ width: "100%", maxWidth: "700px", height: "400px" }}>
-            <Bar data={leadsByAgent} options={chartOptions} />
+        <div className="card mb-4 shadow-sm">
+          <div className="card-body">
+            <h5 className="card-title">Leads Closed by Sales Agent</h5>
+            <div style={{ width: "100%", maxWidth: "700px", height: "400px" }}>
+              <Bar data={leadsByAgent} options={chartOptions} />
+            </div>
           </div>
-        </section>
+        </div>
 
         {/* Lead Status Distribution */}
-        <section>
-          <h3>Lead Status Distribution</h3>
-          <div style={{ width: "100%", maxWidth: "500px", height: "300px" }}>
-            <Pie data={statusDistribution} options={chartOptions} />
+        <div className="card mb-4 shadow-sm">
+          <div className="card-body">
+            <h5 className="card-title">Lead Status Distribution</h5>
+            <div style={{ width: "100%", maxWidth: "500px", height: "300px" }}>
+              <Pie data={statusDistribution} options={chartOptions} />
+            </div>
           </div>
-        </section>
+        </div>
       </main>
 
       {/* Responsive layout for small screens */}
