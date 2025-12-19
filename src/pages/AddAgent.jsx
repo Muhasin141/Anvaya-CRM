@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import SideBar from "../components/SideBar";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddAgent = () => {
   const [formData, setFormData] = useState({ name: "", email: "" });
@@ -16,7 +17,6 @@ const AddAgent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(formData.email)) {
       toast.error("Please enter a valid email address");
@@ -33,34 +33,69 @@ const AddAgent = () => {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <SideBar />
-      <main style={{ flex: 1, padding: "1rem" }}>
-        <h1>Add New Agent</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <br />
-          <button type="submit">Add Agent</button>
-        </form>
+    <div className="d-flex" style={{ minHeight: "100vh" }}>
+      {/* Sidebar */}
+      <aside
+        className="bg-light"
+        style={{
+          width: "220px",
+          minWidth: "220px",
+          borderRight: "1px solid #ddd",
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+        }}
+      >
+        <SideBar />
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-grow-1 p-3">
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <h2 className="card-title mb-4">Add New Agent</h2>
+
+            <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+              <div className="form-group">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Email:</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="d-flex gap-2">
+                <button type="submit" className="btn btn-primary">
+                  Add Agent
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <ToastContainer position="top-right" autoClose={3000} />
       </main>
     </div>
   );
