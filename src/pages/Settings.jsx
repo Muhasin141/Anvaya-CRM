@@ -33,12 +33,9 @@ const SettingsPage = () => {
   };
 
   return (
-    <div
-      className="layout"
-      style={{ display: "flex", minHeight: "100vh", flexDirection: "row" }}
-    >
-      <SideBar />
-      <main style={{ flex: 1, padding: "1rem", minWidth: 0 }}>
+  <div className="d-flex flex-column flex-md-row min-vh-100">
+  <SideBar />
+  <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Settings</h1>
 
         {/* Leads Section */}
@@ -149,6 +146,7 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+
 
 
 
