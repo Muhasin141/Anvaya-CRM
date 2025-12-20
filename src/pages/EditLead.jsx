@@ -67,17 +67,20 @@ const EditLead = () => {
 
   if (loading) {
     return (
-      <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">Loading lead...</main>
+      <div className="d-flex min-vh-100">
+        <SideBar />
+        <main className="flex-fill p-3 p-md-4">Loading lead...</main>
       </div>
     );
   }
 
   return (
-  <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex min-vh-100">
+      {/* Fixed Sidebar */}
+      <SideBar />
+
+      {/* Main Content */}
+      <main className="flex-fill p-3 p-md-4" style={{ minWidth: 0 }}>
         <h1 className="mb-4">Edit Lead</h1>
 
         <div className="card shadow-sm">
