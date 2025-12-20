@@ -17,10 +17,9 @@ const Dashboard = () => {
       : leads.filter((lead) => lead.status === selectedStatus);
 
   return (
-    <div className="d-flex min-vh-100">
-      <SideBar />
-
-      <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+  <SideBar />
+  <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Anvaya CRM Dashboard</h1>
 
         {loading && <p>Loading leads...</p>}
@@ -100,4 +99,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
