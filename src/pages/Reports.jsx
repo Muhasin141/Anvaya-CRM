@@ -88,17 +88,9 @@ const Reports = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        flexDirection: "row",
-      }}
-      className="layout"
-    >
-      <SideBar />
-
-      <main style={{ flex: 1, padding: "1.5rem", minWidth: 0 }}>
+   <div className="d-flex flex-column flex-md-row min-vh-100">
+  <SideBar />
+  <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Anvaya CRM Reports</h1>
 
         {/* Pipeline vs Closed */}
@@ -147,3 +139,4 @@ const Reports = () => {
 };
 
 export default Reports;
+
