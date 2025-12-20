@@ -29,9 +29,9 @@ const LeadsList = () => {
   }
 
   return (
-   <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+      <SideBar />
+      <main className="flex-fill p-3 p-md-4">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h1>Leads List</h1>
           <Link className="btn btn-primary" to="/add-lead">
@@ -104,5 +104,6 @@ const LeadsList = () => {
 };
 
 export default LeadsList;
+
 
 
