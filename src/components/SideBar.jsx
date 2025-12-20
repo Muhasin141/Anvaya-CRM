@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const location = useLocation();
   const isDashboard = location.pathname === "/";
-  const [isOpen, setIsOpen] = useState(false); // for mobile menu toggle
 
   const navLinks = [
     { to: "/", label: "Dashboard" },
@@ -29,7 +28,7 @@ const SideBar = () => {
 
         {/* NAV */}
         {isDashboard ? (
-          <nav className="nav flex-column nav-pills p-2 gap-2">
+          <nav className="nav flex-column nav-pills p-3 gap-3">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
@@ -44,7 +43,7 @@ const SideBar = () => {
             ))}
           </nav>
         ) : (
-          <div className="p-2 text-center">
+          <div className="p-3 text-center">
             <NavLink to="/" className="btn btn-outline-light btn-sm">
               ← Back
             </NavLink>
@@ -54,40 +53,37 @@ const SideBar = () => {
 
       {/* Top navbar for small screens */}
       <nav className="navbar navbar-dark bg-dark d-flex d-md-none p-2">
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h6">Anvaya</span>
-          <button
-            className="navbar-toggler"
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+        <div className="container-fluid flex-wrap align-items-center">
+          <span className="navbar-brand mb-0 h6 me-3">Anvaya</span>
+          {isDashboard && (
+            <div className="d-flex gap-3 flex-wrap">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.to === "/"}
+                  className={({ isActive }) =>
+                    `nav-link ${isActive ? "active" : "text-white"}`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </div>
+          )}
+          {!isDashboard && (
+            <NavLink to="/" className="btn btn-outline-light btn-sm">
+              ← Back
+            </NavLink>
+          )}
         </div>
-
-        {isOpen && isDashboard && (
-          <div className="bg-dark w-100 text-center">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === "/"}
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "active" : "text-white"}`
-                }
-                onClick={() => setIsOpen(false)} // close on click
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </div>
-        )}
       </nav>
     </>
   );
 };
 
 export default SideBar;
+
 
 
 
