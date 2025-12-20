@@ -20,24 +20,9 @@ const AgentsList = () => {
   };
 
   return (
-    <div className="d-flex" style={{ minHeight: "100vh" }}>
-      {/* Sidebar */}
-      <aside
-        className="bg-light"
-        style={{
-          width: "220px",
-          minWidth: "220px",
-          borderRight: "1px solid #ddd",
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-        }}
-      >
-        <SideBar />
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-grow-1 p-3">
+  <div className="d-flex flex-column flex-md-row min-vh-100">
+  <SideBar />
+  <main className="flex-fill p-3 p-md-4">
         <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
           <h1 className="mb-2 mb-md-0">Agents List</h1>
           <Link className="btn btn-primary" to="/add-agent">
@@ -81,6 +66,7 @@ const AgentsList = () => {
 };
 
 export default AgentsList;
+
 
 
 
