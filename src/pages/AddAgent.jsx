@@ -33,24 +33,9 @@ const AddAgent = () => {
   };
 
   return (
-    <div className="d-flex" style={{ minHeight: "100vh" }}>
-      {/* Sidebar */}
-      <aside
-        className="bg-light"
-        style={{
-          width: "220px",
-          minWidth: "220px",
-          borderRight: "1px solid #ddd",
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-        }}
-      >
-        <SideBar />
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-grow-1 p-3">
+  <div className="d-flex flex-column flex-md-row min-vh-100">
+  <SideBar />
+  <main className="flex-fill p-3 p-md-4">
         <div className="card shadow-sm">
           <div className="card-body">
             <h2 className="card-title mb-4">Add New Agent</h2>
@@ -102,3 +87,4 @@ const AddAgent = () => {
 };
 
 export default AddAgent;
+
