@@ -34,9 +34,9 @@ const LeadsByStatusPage = () => {
   }, [leads, statusFilter, agentFilter, priorityFilter, sortByTime]);
 
   return (
-   <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+      <SideBar />
+      <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Leads By Status</h1>
 
         {/* Filters */}
