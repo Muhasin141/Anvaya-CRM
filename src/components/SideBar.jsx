@@ -7,67 +7,93 @@ const SideBar = () => {
 
   return (
     <aside
-      className="bg-dark text-white d-flex flex-column p-3"
+      className="
+        bg-dark text-white
+        w-100 w-md-auto
+      "
       style={{
-        width: "30%",           // Sidebar takes 30% of screen width
-        minWidth: "220px",      // Optional minimum width
-        minHeight: "100vh",     // Full height on desktop
+        width: "220px", // desktop width
       }}
     >
-      <h4 className="text-center mb-4">Anvaya</h4>
+      {/* BRAND */}
+      <div className="p-3 text-center border-bottom border-secondary">
+        <h5 className="mb-0">Anvaya</h5>
+      </div>
 
+      {/* NAV */}
       {isDashboard ? (
-        <nav className="nav nav-pills flex-column gap-2">
-          <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? "active" : "text-white"}`}>
+        <nav
+          className="
+            nav
+            flex-row flex-md-column
+            nav-pills
+            p-2
+            gap-2
+            justify-content-center justify-content-md-start
+          "
+        >
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `nav-link ${isActive ? "active" : "text-white"}`
+            }
+          >
             Dashboard
           </NavLink>
-          <NavLink to="/leads" className={({ isActive }) => `nav-link ${isActive ? "active" : "text-white"}`}>
+
+          <NavLink
+            to="/leads"
+            className={({ isActive }) =>
+              `nav-link ${isActive ? "active" : "text-white"}`
+            }
+          >
             Leads
           </NavLink>
-          <NavLink to="/agents" className={({ isActive }) => `nav-link ${isActive ? "active" : "text-white"}`}>
-            Sales Agents
+
+          <NavLink
+            to="/agents"
+            className={({ isActive }) =>
+              `nav-link ${isActive ? "active" : "text-white"}`
+            }
+          >
+            Agents
           </NavLink>
-          <NavLink to="/reports" className={({ isActive }) => `nav-link ${isActive ? "active" : "text-white"}`}>
+
+          <NavLink
+            to="/reports"
+            className={({ isActive }) =>
+              `nav-link ${isActive ? "active" : "text-white"}`
+            }
+          >
             Reports
           </NavLink>
-          <NavLink to="/leads/status" className={({ isActive }) => `nav-link ${isActive ? "active" : "text-white"}`}>
-            Leads By Status
+
+          <NavLink
+            to="/leads/status"
+            className={({ isActive }) =>
+              `nav-link ${isActive ? "active" : "text-white"}`
+            }
+          >
+            Status
           </NavLink>
-          <NavLink to="/settings" className={({ isActive }) => `nav-link ${isActive ? "active" : "text-white"}`}>
+
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              `nav-link ${isActive ? "active" : "text-white"}`
+            }
+          >
             Settings
           </NavLink>
         </nav>
       ) : (
-        <NavLink to="/" className="btn btn-outline-light mt-3 align-self-start">
-          ← Back to Dashboard
-        </NavLink>
+        <div className="p-2 text-center">
+          <NavLink to="/" className="btn btn-outline-light btn-sm">
+            ← Back
+          </NavLink>
+        </div>
       )}
-
-      {/* Responsive: Sidebar full width on mobile */}
-      <style>
-        {`
-          @media (max-width: 768px) {
-            aside {
-              width: 100% !important;
-              min-height: auto !important;
-              flex-direction: row;
-              overflow-x: auto;
-            }
-
-            aside nav {
-              flex-direction: row !important;
-              justify-content: space-around;
-              width: 100%;
-            }
-
-            aside nav .nav-link {
-              white-space: nowrap;
-              text-align: center;
-              flex: 1;
-            }
-          }
-        `}
-      </style>
     </aside>
   );
 };
