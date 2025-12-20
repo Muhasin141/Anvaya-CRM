@@ -18,8 +18,8 @@ const Dashboard = () => {
 
   return (
     <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+      <SideBar />
+      <main className="flex-fill p-3">
         <h1 className="mb-4">Anvaya CRM Dashboard</h1>
 
         {loading && <p>Loading leads...</p>}
