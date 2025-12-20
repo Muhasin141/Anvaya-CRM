@@ -42,10 +42,9 @@ const LeadDetails = () => {
   };
 
   if (!lead) {
-    return (
-      <div className="d-flex min-vh-100">
-        <SideBar />
-        <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+  <SideBar />
+  <main className="flex-fill p-3 p-md-4">
           <p>Loading lead...</p>
         </main>
       </div>
@@ -121,4 +120,5 @@ const LeadDetails = () => {
 };
 
 export default LeadDetails;
+
 
