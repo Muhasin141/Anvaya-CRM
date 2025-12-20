@@ -26,7 +26,7 @@ const LeadDetails = () => {
 
   const handleDelete = () => {
     if (!lead) return;
-   
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
 
     try {
       deleteLead(lead._id);
@@ -42,9 +42,10 @@ const LeadDetails = () => {
   };
 
   if (!lead) {
-    <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    return (
+      <div className="d-flex min-vh-100">
+        <SideBar />
+        <main className="flex-fill p-3 p-md-4">
           <p>Loading lead...</p>
         </main>
       </div>
@@ -52,9 +53,12 @@ const LeadDetails = () => {
   }
 
   return (
-   <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex min-vh-100">
+      {/* Sidebar */}
+      <SideBar />
+
+      {/* Main Content */}
+      <main className="flex-fill p-3 p-md-4" style={{ minWidth: 0 }}>
         <h1 className="mb-4">Lead Details</h1>
 
         {/* Lead Card */}
@@ -117,6 +121,4 @@ const LeadDetails = () => {
 };
 
 export default LeadDetails;
-
-
 
