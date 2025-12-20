@@ -9,96 +9,52 @@ const SideBar = () => {
     <aside
       className="
         bg-dark text-white
-        w-100 w-md-auto
+        d-flex flex-row flex-md-column
+        align-items-center align-items-md-start
+        p-2 p-md-3
+        w-100
       "
       style={{
-        width: "220px", // desktop width
+        minHeight: "auto",
       }}
     >
-      {/* BRAND */}
-      <div className="p-3 text-center border-bottom border-secondary">
-        <h5 className="mb-0">Anvaya</h5>
-      </div>
+      {/* Logo */}
+      <h4 className="mb-0 mb-md-4 me-3 me-md-0">Anvaya</h4>
 
-      {/* NAV */}
+      {/* Navigation */}
       {isDashboard ? (
-        <nav
-          className="
-            nav
-            flex-row flex-md-column
-            nav-pills
-            p-2
-            gap-2
-            justify-content-center justify-content-md-start
-          "
-        >
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              `nav-link ${isActive ? "active" : "text-white"}`
-            }
-          >
+        <nav className="nav nav-pills flex-row flex-md-column gap-2 w-100">
+          <NavLink to="/" end className="nav-link text-white">
             Dashboard
           </NavLink>
-
-          <NavLink
-            to="/leads"
-            className={({ isActive }) =>
-              `nav-link ${isActive ? "active" : "text-white"}`
-            }
-          >
+          <NavLink to="/leads" className="nav-link text-white">
             Leads
           </NavLink>
-
-          <NavLink
-            to="/agents"
-            className={({ isActive }) =>
-              `nav-link ${isActive ? "active" : "text-white"}`
-            }
-          >
-            Agents
+          <NavLink to="/agents" className="nav-link text-white">
+            Sales Agents
           </NavLink>
-
-          <NavLink
-            to="/reports"
-            className={({ isActive }) =>
-              `nav-link ${isActive ? "active" : "text-white"}`
-            }
-          >
+          <NavLink to="/reports" className="nav-link text-white">
             Reports
           </NavLink>
-
-          <NavLink
-            to="/leads/status"
-            className={({ isActive }) =>
-              `nav-link ${isActive ? "active" : "text-white"}`
-            }
-          >
-            Status
+          <NavLink to="/leads/status" className="nav-link text-white">
+            Leads By Status
           </NavLink>
-
-          <NavLink
-            to="/settings"
-            className={({ isActive }) =>
-              `nav-link ${isActive ? "active" : "text-white"}`
-            }
-          >
+          <NavLink to="/settings" className="nav-link text-white">
             Settings
           </NavLink>
         </nav>
       ) : (
-        <div className="p-2 text-center">
-          <NavLink to="/" className="btn btn-outline-light btn-sm">
-            ← Back
-          </NavLink>
-        </div>
+        <NavLink to="/" className="btn btn-outline-light ms-auto ms-md-0">
+          ← Back
+        </NavLink>
       )}
     </aside>
   );
 };
 
 export default SideBar;
+
+
 
 
 
