@@ -10,7 +10,8 @@ const SettingsPage = () => {
   const navigate = useNavigate();
 
   const handleDeleteLead = (id) => {
-  
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
+
     try {
       deleteLead(id);
       toast.success("Lead deleted successfully");
@@ -21,7 +22,7 @@ const SettingsPage = () => {
   };
 
   const handleDeleteAgent = async (id) => {
-  
+    if (!window.confirm("Are you sure you want to delete this agent?")) return;
 
     try {
       await deleteAgent(id);
@@ -33,9 +34,9 @@ const SettingsPage = () => {
   };
 
   return (
-  <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+      <SideBar />
+      <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Settings</h1>
 
         {/* Leads Section */}
@@ -146,7 +147,4 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
-
-
-
 
