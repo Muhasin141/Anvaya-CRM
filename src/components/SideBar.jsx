@@ -3,20 +3,35 @@ import { NavLink, useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const location = useLocation();
-
-  // If NOT on dashboard
   const isDashboard = location.pathname === "/";
 
   return (
     <aside
-      className="bg-dark text-white d-flex flex-column p-3"
-      style={{ width: "220px", minHeight: "100vh" }}
+      className="
+        bg-dark text-white
+        w-100 w-md-auto
+      "
+      style={{
+        width: "220px", // desktop width
+      }}
     >
-      <h4 className="text-center mb-4">Anvaya</h4>
+      {/* BRAND */}
+      <div className="p-3 text-center border-bottom border-secondary">
+        <h5 className="mb-0">Anvaya</h5>
+      </div>
 
-      {/* DASHBOARD SIDEBAR */}
+      {/* NAV */}
       {isDashboard ? (
-        <nav className="nav nav-pills flex-column gap-2">
+        <nav
+          className="
+            nav
+            flex-row flex-md-column
+            nav-pills
+            p-2
+            gap-2
+            justify-content-center justify-content-md-start
+          "
+        >
           <NavLink
             to="/"
             end
@@ -42,7 +57,7 @@ const SideBar = () => {
               `nav-link ${isActive ? "active" : "text-white"}`
             }
           >
-            Sales Agents
+            Agents
           </NavLink>
 
           <NavLink
@@ -60,7 +75,7 @@ const SideBar = () => {
               `nav-link ${isActive ? "active" : "text-white"}`
             }
           >
-            Leads By Status
+            Status
           </NavLink>
 
           <NavLink
@@ -73,15 +88,17 @@ const SideBar = () => {
           </NavLink>
         </nav>
       ) : (
-        /* BACK BUTTON SIDEBAR */
-        <NavLink to="/" className="btn btn-outline-light mt-3 align-self-start">
-          ← Back to Dashboard
-        </NavLink>
+        <div className="p-2 text-center">
+          <NavLink to="/" className="btn btn-outline-light btn-sm">
+            ← Back
+          </NavLink>
+        </div>
       )}
     </aside>
   );
 };
 
 export default SideBar;
+
 
 
