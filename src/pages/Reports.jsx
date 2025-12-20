@@ -88,16 +88,22 @@ const Reports = () => {
   };
 
   return (
-   <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+      {/* Sidebar */}
+      <SideBar />
+
+      {/* Main Content */}
+      <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Anvaya CRM Reports</h1>
 
         {/* Pipeline vs Closed */}
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
-            <h5 className="card-title">Total Leads: Pipeline vs Closed</h5>
-            <div style={{ width: "100%", maxWidth: "500px", height: "300px" }}>
+            <h5 className="card-title">Pipeline vs Closed</h5>
+            <div
+              className="w-100"
+              style={{ maxWidth: "500px", height: "300px" }}
+            >
               <Pie data={pipelineVsClosed} options={chartOptions} />
             </div>
           </div>
@@ -107,7 +113,10 @@ const Reports = () => {
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">Leads Closed by Sales Agent</h5>
-            <div style={{ width: "100%", maxWidth: "700px", height: "400px" }}>
+            <div
+              className="w-100"
+              style={{ maxWidth: "700px", height: "400px" }}
+            >
               <Bar data={leadsByAgent} options={chartOptions} />
             </div>
           </div>
@@ -117,26 +126,19 @@ const Reports = () => {
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
             <h5 className="card-title">Lead Status Distribution</h5>
-            <div style={{ width: "100%", maxWidth: "500px", height: "300px" }}>
+            <div
+              className="w-100"
+              style={{ maxWidth: "500px", height: "300px" }}
+            >
               <Pie data={statusDistribution} options={chartOptions} />
             </div>
           </div>
         </div>
       </main>
-
-      {/* Responsive layout for small screens */}
-      <style>
-        {`
-          @media (max-width: 768px) {
-            .layout {
-              flex-direction: column;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
 
 export default Reports;
+
 
