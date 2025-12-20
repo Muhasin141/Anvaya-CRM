@@ -33,9 +33,9 @@ const AddAgent = () => {
   };
 
   return (
-  <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+      <SideBar />
+      <main className="flex-fill p-3">
         <div className="card shadow-sm">
           <div className="card-body">
             <h2 className="card-title mb-4">Add New Agent</h2>
@@ -87,4 +87,6 @@ const AddAgent = () => {
 };
 
 export default AddAgent;
+
+
 
