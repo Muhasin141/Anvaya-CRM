@@ -9,7 +9,11 @@ const AgentsList = () => {
   const navigate = useNavigate();
 
   const handleDelete = async (id) => {
-   
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this agent?"
+    );
+
+    if (!confirmDelete) return;
 
     try {
       await deleteAgent(id);
@@ -20,9 +24,9 @@ const AgentsList = () => {
   };
 
   return (
-  <div className="d-flex flex-column flex-md-row min-vh-100">
-  <SideBar />
-  <main className="flex-fill p-3 p-md-4">
+    <div className="d-flex flex-column flex-md-row min-vh-100">
+      <SideBar />
+      <main className="flex-fill p-3 p-md-4">
         <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
           <h1 className="mb-2 mb-md-0">Agents List</h1>
           <Link className="btn btn-primary" to="/add-agent">
@@ -66,6 +70,7 @@ const AgentsList = () => {
 };
 
 export default AgentsList;
+
 
 
 
