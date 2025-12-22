@@ -56,7 +56,7 @@ const SideBar = () => {
         <div className="container-fluid flex-wrap align-items-center">
           <span className="navbar-brand mb-0 h6 me-3">Anvaya</span>
           {isDashboard && (
-            <div className="d-flex gap-3 flex-wrap">
+            <div className="d-flex gap-2 flex-wrap">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.to}
@@ -83,6 +83,7 @@ const SideBar = () => {
 };
 
 export default SideBar;
+
 
 
 
