@@ -53,12 +53,9 @@ const LeadDetails = () => {
   }
 
   return (
-    <div className="d-flex min-vh-100">
-      {/* Sidebar */}
+   <div className="d-flex flex-column flex-md-row min-vh-100">
       <SideBar />
-
-      {/* Main Content */}
-      <main className="flex-fill p-3 p-md-4" style={{ minWidth: 0 }}>
+      <main className="flex-fill p-3 p-md-4">
         <h1 className="mb-4">Lead Details</h1>
 
         {/* Lead Card */}
@@ -121,5 +118,6 @@ const LeadDetails = () => {
 };
 
 export default LeadDetails;
+
 
 
