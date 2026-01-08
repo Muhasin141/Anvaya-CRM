@@ -96,12 +96,12 @@ List all the sales agents<br>
 Sample Response:<br>
 ```[{name,email, created At},....]```
 
-### *** POST /api/agents***
+### ***POST /api/agents***
 Create Sales agent<br>
 Sample Response:<br>
 ```[{name,email, created At}]```
 
-### *** DELETE/api/agents/:id***
+### ***DELETE/api/agents/:id***
 Delete Sales agent<br>
 Sample Response:<br>
 ```[{name,email, created At}]```
