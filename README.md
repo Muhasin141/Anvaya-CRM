@@ -79,17 +79,17 @@ Sample Response:<br>
 ### ***GET /api/leads/:id***
 Get details of one lead <br>
 Sample Response:<br>
-```[{name,source,sales agent,status,tags,timeToCloss,priority}]```
+```[{name,source,sales agent,status,tags,timeToClose,priority}]```
 
 ### ***PUT /api/leads/:id***
 Update one lead <br>
 Sample Response:<br>
-```[{name,source,sales agent,status,tags,timeToCloss,priority}]```
+```[{name,source,sales agent,status,tags,timeToClose,priority}]```
 
 ### ***DELETE /api/leads/:id***
 Delete one lead <br>
 Sample Response:<br>
-```[{name,source,sales agent,status,tags,timeToCloss,priority}]```
+```[{name,source,sales agent,status,tags,timeToClose,priority}]```
 
 ### ***GET /api/agents***
 List all the sales agents<br>
